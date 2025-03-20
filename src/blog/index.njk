@@ -1,0 +1,60 @@
+---
+layout: layouts/page.njk
+title: Blog
+description: posts by bytesbeard
+permalink: /blog/
+---
+
+<div class="tagbar" id="tagBar">
+  <a class="tag is-active" href="/blog/" data-tag="all">all</a>
+  {% for t in collections.tagList %}
+    <a class="tag" href="/blog/?tag={{ t | url }}" data-tag="{{ t }}">{{ t }}</a>
+  {% endfor %}
+</div>
+
+<ul class="list" id="postList">
+{% for post in collections.posts %}
+  {% set tags = post.data.tags | postTags %}
+  <li class="post-item" data-tags="{{ tags | join(',') }}">
+
+{% set badges = post.data.badges or [] %}
+{% set listBadge = (badges | selectattr("list") | first) %}
+
+    <div class="post-head">
+      <div class="post-titleline">
+        <a class="post-title" href="{{ post.url }}">{{ post.data.title }}</a>
+
+        {% if listBadge %}
+          {% if listBadge.href %}
+            <a class="badge badge-{{ listBadge.kind or 'default' }} badge-inline"
+              href="{{ listBadge.href }}"
+              target="_blank"
+              rel="noopener noreferrer">
+              {{ listBadge.text }}
+            </a>
+          {% else %}
+            <span class="badge badge-{{ listBadge.kind or 'default' }} badge-inline">
+              {{ listBadge.text }}
+            </span>
+          {% endif %}
+        {% endif %}
+      </div>
+
+      <span class="meta"> · {{ post.date | date("yyyy-MM-dd") }}</span>
+    </div>
+
+
+    {% if post.data.description %}
+      <div class="post-desc">{{ post.data.description }}</div>
+    {% endif %}
+
+    {% if tags.length %}
+      <div class="tags">
+        {% for t in tags %}
+          <a class="tag" href="/blog/?tag={{ t | url }}" data-taglink="{{ t }}">{{ t }}</a>
+        {% endfor %}
+      </div>
+    {% endif %}
+  </li>
+{% endfor %}
+</ul>

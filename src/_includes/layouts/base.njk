@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% set fullTitle = (title + " · " + site.name) if title else site.name %}
+    <title>{{ fullTitle }}</title>
+    {% if description %}
+      <meta name="description" content="{{ description }}">
+    {% endif %}
+
+    <link rel="stylesheet" href="/assets/site.css">
+    <script defer src="/assets/build/main.js"></script>
+  </head>
+
+  <body>
+    <header class="topbar">
+      <div class="wrap">
+        <a class="brand" href="/">{{ site.name }}</a>
+        <nav class="nav">
+          <a href="/blog/">blog</a>
+          <a href="/projects/">projects</a>
+          <a href="/talks/">talks</a>
+          <a href="/about/">about</a>
+          <a href="{{ site.links.github }}">github</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="wrap">
+      {{ content | safe }}
+    </main>
+
+    <footer class="footer">
+      <div class="wrap">© {{ "" | year }} {{ site.name }}</div>
+    </footer>
+  </body>
+</html>

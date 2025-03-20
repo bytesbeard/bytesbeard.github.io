@@ -1,0 +1,42 @@
+---
+layout: layouts/base.njk
+---
+
+<article class="prose">
+  <h1>{{ title }}</h1>
+
+  {% if date %}
+    <p class="meta">Published: {{ date | date("yyyy-MM-dd") }}</p>
+  {% endif %}
+
+  {% set badges = badges or [] %}
+  {% if badges | length %}
+    <div class="badges">
+      {% for b in badges %}
+        {% set badgeClass = "badge" %}
+        {% if b.kind %}
+          {% set badgeClass = badgeClass + " badge-" + b.kind %}
+        {% endif %}
+
+        {% if b.href %}
+          <a class="{{ badgeClass }}" href="{{ b.href }}" target="_blank" rel="noopener noreferrer">{{ b.text }}</a>
+        {% else %}
+          <span class="{{ badgeClass }}">{{ b.text }}</span>
+        {% endif %}
+      {% endfor %}
+    </div>
+  {% endif %}
+
+  {% set tags = displayTags or [] %}
+  {% if tags | length %}
+    <div class="tags">
+      {% for t in tags %}
+        <a class="tag" href="/blog/?tag={{ t | urlencode }}">{{ t }}</a>
+      {% endfor %}
+    </div>
+  {% endif %}
+
+  <div class="content">
+    {{ content | safe }}
+  </div>
+</article>

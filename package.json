@@ -1,0 +1,21 @@
+{
+  "name": "bytesbeard.github.io",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "npm run build:ts && npx @11ty/eleventy --serve",
+    "build:ts": "node scripts/build-ts.mjs",
+    "validate:posts": "node scripts/validate-posts.mjs",
+    "clean": "rm -rf _site",
+    "build": "npm run clean && npm run validate:posts && npm run build:ts && npx @11ty/eleventy",
+    "new:post": "node scripts/new-post.mjs"
+  },
+  "dependencies": {
+    "@11ty/eleventy": "^3.0.0",
+    "gray-matter": "^4.0.3"
+  },
+  "devDependencies": {
+    "esbuild": "^0.24.0",
+    "typescript": "^5.6.3"
+  }
+}
