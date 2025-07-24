@@ -2,6 +2,7 @@
   "name": "bytesbeard",
   "tagline": "tiny notes on systems, ops, and software",
   "links": {
-    "github": "https://github.com/bytesbeard"
+    "github": "https://github.com/bytesbeard",
+    "workshops": "https://bbworkshops.netlify.app"
   }
 }
